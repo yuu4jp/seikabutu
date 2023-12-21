@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('comment',1000);
             $table->string('deadline',30);
-            $table->string('pdf',1000);
+            $table->string('pdf');
         });
     }
 
