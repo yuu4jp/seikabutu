@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('sex');
+            $table->int('age');
+            $table->string('departure');
+            $table->int('master');
+            $table->string('image');
         });
     }
 
