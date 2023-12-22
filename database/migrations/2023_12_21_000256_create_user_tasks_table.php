@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('user_tasks', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('task_id')->consttained()->onDelete('cascade');
-            $table->string('start_date',20);
-            $table->string('end_date',20);
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
