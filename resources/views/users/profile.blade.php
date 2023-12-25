@@ -1,3 +1,4 @@
+<!--平社員アカウントで入った場合に表示されるページ-->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -24,8 +25,8 @@
                 <h3></h3>
             </div>
         @endforeach
-        <div class="carender">
-            <a href="">カレンダー</a>
+        <div class="carendar">
+            <a href="calendars/calendar">カレンダー</a>
         </div>
     </body>
 </html>

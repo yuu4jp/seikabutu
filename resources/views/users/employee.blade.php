@@ -1,4 +1,4 @@
-<!--マスターアカウントでログインした場合に表示されるページ-->
+<!--個人情報詳細ページ（管理アカウントのみから入れる）編集ボタンなし-->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -7,14 +7,12 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <div>
-            @foreach ($users as $user)
-        <div class="member">
-            <div class="face" img={{$user->image}}></div>
+        <div class="image" img={{$user->image}}></div>
+        <div class="information">
             <div class='name'>
                 <h3>{{$user->name}}</h3>
             </div>
-            <!--<div class='sex' >
+            <div class='sex' >
                 <h3>{{$user->sex}}</h3>
             </div>
             <div class='age' >
@@ -22,16 +20,20 @@
             </div>
             <div class='departure'>
                 <h3>{{$user->departure}}</h3>
-            </div>-->
-            <a href="/users/{{$user->id}}/customize">詳細</a>
+            </div>
         </div>
+        @foreach ($trainings as $training)
+            <div class='training'>
+                <h3>{{$training->training}}</h3>
+            </div>
         @endforeach
-        </div>
-        <div class="paginate">
-            {{$->links()}}
-        </div>
-        <div>
-            <a class="add" href="">追加</a>
-        </div>
+        @foreach ($tasks as $task)
+            <div class="task">
+                <h3>{{$task->task}}</h3>
+            </div>
+            <div class="stastus">
+                <h3></h3>
+            </div>
+        @endforeach
     </body>
 </html>

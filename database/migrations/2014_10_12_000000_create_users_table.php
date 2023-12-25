@@ -22,9 +22,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('sex');
-            $table->int('age');
+            $table->integer('age');
             $table->string('departure');
-            $table->int('master');
+            $table->integer('master');
             $table->string('image');
         });
     }
