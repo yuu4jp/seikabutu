@@ -14,15 +14,12 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function profile(User $user)
+    public function profile(User $user,Training $training)
     {
-        return view('users.profile')->with(['users' => $user->get()]);  
+        return view('users.profile')->with(['users'=>$user->get(), 'trainings'=>$training->get()]);
        //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     }
-    public function profile(Training $training)
-    {
-        return view('trainings.profile')->with(['training'=> $training->get()]);
-    }
+    
     public function edit(Request $request): View
     {
         return view('profile.edit', [
