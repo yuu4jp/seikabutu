@@ -15,7 +15,7 @@
             <h3>{{$user->age}}</h3>
             <h3>{{$user->departure}}</h3>
             <h3>{{$training->training}}</h3>
-            <a href="">編集</a>
+            <a href="/users/{{$user->id}}/edit">編集</a>
         </div>
         @endforeach
         </div>
