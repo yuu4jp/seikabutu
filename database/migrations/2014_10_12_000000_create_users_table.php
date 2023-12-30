@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('sex');
             $table->integer('age');
             $table->string('departure');
-            $table->integer('master');
+            //$table->integer('master');
             $table->string('image');
         });
     }

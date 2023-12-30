@@ -8,16 +8,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Sistem;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function profile(User $user,Training $training)
+    /*public function create(User $user): View
     {
-        return view('users.profile')->with(['users'=>$user->get(), 'trainings'=>$training->get()]);
-       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
+        if ($user->master=0) {
+            return view('user.master');
+        } elseif ($user->master=1) {
+            return view('user.management');
+        } else {
+            return view('user.profile');
+        }
+    }*/
+    public function profile(User $user,Training $training,Task $task)
+    {   
+        if ($user->master=0) {
+            return view('user.master')->with(['users'=>$user->get()]);
+        } elseif ($user->master=1) {
+            return view('user.management')->with(['users'=>$user->get()]);
+        } else {
+        //DBから情報を引っ張ってきてprofile.blade.phpに{{$user->name}}ってできるようにしてる
+        return view('users.profile')->with(['users'=>$user->get(), 'trainings'=>$training->get(), 'tasks'=>$task->get()]);
+        }
+    }
+    
+    public function add(Request $request,User $user)
+    {
+        $input = $request['user'];
+        $user->fill($input)->save();
+        return redirect('/user/master');
+    }
+    
+    public function create()
+    {
+        return view('users/master/create');
     }
     
     public function edit(Request $request): View
@@ -25,6 +54,12 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+    
+    public function pdf(Request $request, Task $task)
+    {//profile.blade.phpのモーダルからの情報を保存
+        $input = $request['task'];
+        $task->fill($input)->save();
     }
 
     /**

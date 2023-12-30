@@ -3,7 +3,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
@@ -30,8 +29,8 @@
         <div class="paginate">
             {{$->links()}}
         </div>
-        <div>
-            <a class="add" href="">追加</a>
+        <div class='add'>
+            <a class="add" href="/users/master/create">追加</a>
         </div>
     </body>
 </html>
