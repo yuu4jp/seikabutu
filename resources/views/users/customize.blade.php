@@ -35,5 +35,6 @@
             </div>
         @endforeach
         <div class="edit"><a href="/users/{{ $user->id }}/edit">編集</a></div>
+        <div class="back"><a href="/users/master">back</a></div>
     </body>
 </html>

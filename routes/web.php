@@ -15,8 +15,12 @@ use App\Http\Controllers\EventController;
 */
 Route::controller(ProfileController::class)->middlweware(['auth'])->groupe(function(){
     Route::get('/','profile')->name('profile');
-    Route::post('/user/master/add','add')->name('add');//新規追加実行用ルーティング
-    Route::get('/user/master/add/create', 'create')->name('create');//masterページからaddページに移行
+    Route::get('/users/master','master')->name('master');//addページもしくはcustomページからmasterページに戻る
+    Route::post('/users/add','add')->name('add');//masterページからaddページに移行
+    Route::get('/users/create', 'create')->name('create');//新規追加実行用ルーティング
+    Route::get('/users/{user}/edit','edition')->name('editon');//editページ表示
+    Route::put('users/{user}','updated')->name('updated');//編集実行ルーティング
+    Route::get('users/{user}','customize')->name('customize');//customizeページに移行
 });
 Route::get('/calendar', [EventController::class, 'show'])->name("show");
 Route::post('/calendar/create', [EventController::class, 'create'])->name("create"); // 予定の新規追加

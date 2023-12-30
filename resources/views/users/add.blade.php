@@ -39,8 +39,8 @@
                 <h3>写真</h3>
                 <input type='file' accept='image/png, image/ipeg' name='user[image]'>
             </div>
-            <input type="submit" value="保存"/>
+            <input type="submit" value="create"/>
         </form>
-        <div class="back">[<a href="/">back</a>]</div>
+        <div class="back"><a href="/user/master">back</a></div>
     </body>
 </html>
