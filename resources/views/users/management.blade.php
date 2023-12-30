@@ -13,7 +13,7 @@
             <div class='name'>
                 <h3>{{$user->name}}</h3>
             </div>
-            <div class='sex' >
+            <!--<div class='sex' >
                 <h3>{{$user->sex}}</h3>
             </div>
             <div class='age' >
@@ -21,7 +21,7 @@
             </div>
             <div class='departure'>
                 <h3>{{$user->departure}}</h3>
-            </div>
+            </div>-->
             <a href="/users/{{$user->id}}/show">詳細</a>
         </div>
         @endforeach

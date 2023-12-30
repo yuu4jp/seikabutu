@@ -29,7 +29,12 @@
         @endforeach
         @foreach ($tasks as $task)
             <div class="task">
-                <h3>{{$task->task}}</h3>
+                <button popovertarget='task' popovertargetaction='show'>{{$task->task}}</button>
+                <div popover id='task'>
+                    <h3>{{$task->comment}}</h3>
+                    <div img="{{$task->pdf}}"></div>
+                <button popovertarget='task' popovertargetaction='hidden'>閉じる</button>
+                </div>
             </div>
             <div class="stastus">
                 <h3></h3>

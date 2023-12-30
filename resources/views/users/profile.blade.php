@@ -3,7 +3,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <h1>マイページ</h1>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
@@ -15,11 +15,24 @@
             <h3>{{$user->sex}}</h3>
             <h3>{{$user->age}}</h3>
             <h3>{{$user->departure}}</h3>
+        </div>
+        @foreach ($trainings as $training)
+        <div class='training'>
             <h3>{{$training->training}}</h3>
         </div>
+        @endforeach
         @foreach ($tasks as $task)
             <div class="task">
-                <h3>{{$task->task}}</h3>
+                <button popovertaget='task' popovertargetaction='show'>{{$task->task}}</button>
+                <div popover id='task'>
+                    <form action='/profile' method='POST'>
+                        @csrf
+                        <textarea name='task[comment]'></textarea>
+                        <input type="file" name='task[pdf]' accept='image/jpeg,image/png,image/pdf'>
+                        <input type='submit' value='保存'>
+                    </form>
+                        <button popovertarget='task' popovertargetaction='hidden'>閉じる</button>
+                </div>
             </div>
             <div class="stastus">
                 <h3></h3>
