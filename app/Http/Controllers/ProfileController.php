@@ -28,25 +28,48 @@ class ProfileController extends Controller
     public function profile(User $user,Training $training,Task $task)
     {   
         if ($user->master=0) {
-            return view('user.master')->with(['users'=>$user->get()]);
+            return view('user/master')->with(['users'=>$user->get()]);
         } elseif ($user->master=1) {
-            return view('user.management')->with(['users'=>$user->get()]);
+            return view('user/management')->with(['users'=>$user->get()]);
         } else {
         //DBから情報を引っ張ってきてprofile.blade.phpに{{$user->name}}ってできるようにしてる
-        return view('users.profile')->with(['users'=>$user->get(), 'trainings'=>$training->get(), 'tasks'=>$task->get()]);
+        return view('users/profile')->with(['users'=>$user->get(), 'trainings'=>$training->get(), 'tasks'=>$task->get()]);
         }
     }
     
-    public function add(Request $request,User $user)
+    public function create(Request $request,User $user)
     {
         $input = $request['user'];
         $user->fill($input)->save();
         return redirect('/user/master');
     }
     
-    public function create()
+    public function add()
     {
-        return view('users/master/create');
+        return view('users/add');
+    }
+    
+    public function master()
+    {
+        return view('users/master');
+    }
+    
+    public function edition(User $user)
+    {
+        return view('users/edit')->with (['user'=>$user]);
+    }
+    
+    public function updated(PostRequest $request, Post $post)
+    {
+        $input_user = $request['user'];
+        $user->fill($input_user)->save();
+    
+        return redirect('users/master' . $user->id);
+    }
+    
+    public function customize(User $user)
+    {
+        return view('users/customize')->with(['user'=>$user]);
     }
     
     public function edit(Request $request): View

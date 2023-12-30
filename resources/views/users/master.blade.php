@@ -22,7 +22,7 @@
             <div class='departure'>
                 <h3>{{$user->departure}}</h3>
             </div>-->
-            <a href="/users/{{$user->id}}/customize">詳細</a>
+            <a href="/users/{{$user->id}}">詳細</a>
         </div>
         @endforeach
         </div>
@@ -30,7 +30,7 @@
             {{$->links()}}
         </div>
         <div class='add'>
-            <a class="add" href="/users/master/create">追加</a>
+            <a class="add" href="/users/add">追加</a>
         </div>
     </body>
 </html>
