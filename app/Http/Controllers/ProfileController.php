@@ -59,7 +59,7 @@ class ProfileController extends Controller
         return view('users/edit')->with (['user'=>$user]);
     }
     
-    public function updated(PostRequest $request, Post $post)
+    public function updated(UserRequest $request, User $user)
     {
         $input_user = $request['user'];
         $user->fill($input_user)->save();
@@ -72,19 +72,20 @@ class ProfileController extends Controller
         return view('users/customize')->with(['user'=>$user]);
     }
     
-    public function edit(Request $request): View
+    /*public function edit(Request $request): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
-    }
+    }*/
     
-    public function pdf(Request $request, Task $task)
+    public function task(Request $request, Task $task)
     {//profile.blade.phpのモーダルからの情報を保存
         $input = $request['task'];
         $task->fill($input)->save();
+        return redirect('users/profile'. $user->id);
     }
-
+    
     /**
      * Update the user's profile information.
      */
