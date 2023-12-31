@@ -25,17 +25,17 @@
             <div class="task">
                 <button popovertaget='task' popovertargetaction='show'>{{$task->task}}</button>
                 <div popover id='task'>
-                    <form action='/profile' method='POST'>
+                    <form action='/users' method='POST'>
                         @csrf
                         <textarea name='task[comment]'></textarea>
                         <input type="file" name='task[pdf]' accept='image/jpeg,image/png,image/pdf'>
-                        <input type='submit' value='保存'>
+                        <input type='submit' value='保存'/>
                     </form>
                         <button popovertarget='task' popovertargetaction='hidden'>閉じる</button>
                 </div>
             </div>
             <div class="stastus">
-                <h3></h3>
+                
             </div>
         @endforeach
         <div class="carendar">
