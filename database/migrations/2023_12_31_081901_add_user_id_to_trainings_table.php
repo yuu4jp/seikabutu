@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_tasks', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('task_id')->consttained()->onDelete('cascade');
-            $table->string('start_date',20);
-            $table->string('end_date',20);
-            $table->timestamps();
+        Schema::table('trainings', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained();
+            //user_idは userテーブルのidを参照する外部キー
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tasks');
+        Schema::table('posts', function (Blueprint $table) {
+            //
+        });
     }
 };
