@@ -40,12 +40,16 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'sex' => $request->sex,
+            'age' => $request ->age,
+            'departure' => $request->departure,
+            'image'=> $request->image,
+            'master'=>$request->master,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(route('master.index'));
     }
 }

@@ -31,6 +31,10 @@
                     <h2>写真</h2>
                     <input type="image" name='user[image]' value='{{ $user->image}}'>
                 </div>
+                <div class='training'>
+                    <h2>資格等</h2>
+                    <input type="image" name='training[training]'>
+                </div>
                 <input type="submit" value="保存">
             </form>
         </div>

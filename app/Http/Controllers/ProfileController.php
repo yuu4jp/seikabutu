@@ -8,13 +8,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+<<<<<<< HEAD
+=======
 use App\Models\Sistem;
+>>>>>>> master
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+<<<<<<< HEAD
+    public function edit(Request $request): View
+=======
     /*public function create(User $user): View
     {
         if ($user->master=0) {
@@ -73,10 +79,15 @@ class ProfileController extends Controller
     }
     
     /*public function edit(Request $request): View
+>>>>>>> master
     {
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+<<<<<<< HEAD
+    }
+
+=======
     }*/
     
     public function task(Request $request, Task $task)
@@ -86,6 +97,7 @@ class ProfileController extends Controller
         return redirect('users/profile'. $user->id);
     }
     
+>>>>>>> master
     /**
      * Update the user's profile information.
      */

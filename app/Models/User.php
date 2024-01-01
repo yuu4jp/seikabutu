@@ -17,6 +17,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    
+    public function tasks()   
+    {//userテーブル一つに対してtask_user(テーブル)は複数
+        return $this->belongsToMany(Task::class);  
+    }
+    
+    public function trainings()
+    {
+        return $this->hasMany(Training::class);
+    }
+    
     protected $fillable = [
         'name',
         'email',
