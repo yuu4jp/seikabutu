@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->string('training');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

@@ -16,11 +16,11 @@
             <h3>{{$user->age}}</h3>
             <h3>{{$user->departure}}</h3>
         </div>
-        @foreach ($trainings as $training)
-        <div class='training'>
+        <div class='training' name='user[training_id]'>
+            @foreach ($trainings as $training)
             <h3>{{$training->training}}</h3>
+            @endforeach
         </div>
-        @endforeach
         @foreach ($tasks as $task)
             <div class="task">
                 <button popovertaget='task' popovertargetaction='show'>{{$task->task}}</button>

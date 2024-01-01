@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     
-    public function user_tasks()   
+    public function tasks()   
     {//userテーブル一つに対してtask_user(テーブル)は複数
-        return $this->hasMany(User_task::class);  
+        return $this->belongsToMany(Task::class);  
     }
     
     public function trainings()
@@ -32,6 +32,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'sex',
+        'age',
+        'departure',
+        'employee_id',
+        'master',
+        'image',
     ];
 
     /**

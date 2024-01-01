@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_tasks', function (Blueprint $table) {
-            $table->string('start_date');
-            $table->string('end_date');
-            $table->timestamps();
+        Schema::create('user_task', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users');   //参照先のテーブル名を
+            $table->foreignId('task_id')->constrained('tasks');    //constrainedに記載
+            $table->primary(['user_id', 'task_id']);
         });
     }
 

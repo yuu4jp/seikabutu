@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('comment');
             $table->string('task');
             $table->string('pdf');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
