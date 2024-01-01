@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
 h1 {
     @apply text-3xl font-bold my-2;
 }
@@ -13,3 +14,5 @@ h3 {
 a {
     @apply text-blue-600 underline;
 }
+=======
+>>>>>>> master

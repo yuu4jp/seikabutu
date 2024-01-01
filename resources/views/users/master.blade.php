@@ -7,6 +7,7 @@
             <div class='name'>
                 <h3>{{$user->name}}</h3>
             </div>
+
             <a href="/users/{{$user->id}}">詳細</a>
         </div>
         @endforeach

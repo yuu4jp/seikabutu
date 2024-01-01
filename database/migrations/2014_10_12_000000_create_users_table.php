@@ -24,8 +24,13 @@ return new class extends Migration
             $table->string('sex');
             $table->integer('age');
             $table->string('departure');
+<<<<<<< HEAD
             $table->integer('master')->default(2);
             $table->string('image')->nullable();
+=======
+            //$table->integer('master');
+            $table->string('image');
+>>>>>>> master
         });
     }
 
