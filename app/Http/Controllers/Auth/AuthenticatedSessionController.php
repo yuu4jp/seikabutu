@@ -28,13 +28,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-<<<<<<< HEAD
+        
+        
         if(Auth::user()->master == 0){
             return redirect()->intended(route('master.index'));
         }
-=======
-
->>>>>>> master
+        elseif(Auth::user()->master == 1){
+            return redirect()->intended(route('management.index'));
+        }
+        elseif(Auth::user()->master == 2){
+            return redirect()->intended(route('staff.index'));
+        }
+        
+        
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

@@ -12,4 +12,12 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class);  
     }
+    
+    protected $fillable = [
+        'task',
+        'comment',
+        'pdf',
+        'start_date',
+        'end_date',
+    ];
 }
