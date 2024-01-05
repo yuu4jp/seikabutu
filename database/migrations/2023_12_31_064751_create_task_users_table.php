@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_task', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users');   //参照先のテーブル名を
             $table->foreignId('task_id')->constrained('tasks');    //constrainedに記載
-            $table->primary(['user_id', 'task_id']);
+            $table->primary(['task_id', 'user_id']);
         });
     }
 

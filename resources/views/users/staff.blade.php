@@ -6,12 +6,8 @@
             <h3>{{$user->sex}}</h3>
             <h3>{{$user->age}}</h3>
             <h3>{{$user->departure}}</h3>
+            <h3>{{$user->training}}</h3>
         </div>
-        {{--<div class='training' name='user[training_id]'>
-            @foreach ($trainings as $training)
-            <h3>{{$training->training}}</h3>
-            @endforeach
-        </div>--}}
         <div class="task_add">
             <h3>タスクの追加</h3>
             <button popovertarget='task_add' popovertargetaction='show'>追加する</button>
@@ -26,24 +22,39 @@
             </div>
         </div>
         <p class='open'>タスク一覧</p>
-        {{--@foreach ($tasks as $task)
+        @foreach ($tasks as $task)
             <div class="task">
                 <button popovertarget='task' popovertargetaction='show'>{{$task->task}}</button>
                 <div popover id='task'>
-                    <form action='/users' method='POST'>
+                    <form action='/users/task_create' method='POST'>
                         @csrf
                         <textarea name='task[comment]'></textarea>
                         <input type="file" name='task[pdf]' accept='image/jpeg,image/png,image/pdf'>
                         <input type='submit' value='保存'/>
                     </form>
-                        <button popovertarget='task' popovertargetaction='hidden'>閉じる</button>
+                    
+                    <form action="/users/show/{{$task->id}}/delete" id="form_{{$task->id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type='button' onclick="deleteTask({{$task->id}})">削除</button>
+                    </form>
+                    <button popovertarget='task' popovertargetaction='hidden'>閉じる</button>
                 </div>
             </div>
             <div class="stastus">
                 
             </div>
-        @endforeach--}}
+        @endforeach
         <div class="carendar">
             <a href="calendars/calendar">カレンダー</a>
         </div>
+        <script>
+        function deleteTask(id) {
+            'use strict'
+    
+            if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                document.getElementById(`form_${id}`).submit();
+            }
+        }
+        </script>
 </x-app-layout>

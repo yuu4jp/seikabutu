@@ -9,7 +9,7 @@ class User_task extends Model
 {
     use HasFactory;
     
-    public function tasks()   
+    /*public function tasks()   
     {//user_tasksテーブル一つに対してtask(テーブル)は複数
         return $this->hasMany(Task::class);  
     }
@@ -17,5 +17,5 @@ class User_task extends Model
     public function user()   
     {//user_taskテーブル一つに対してuser(テーブル)は複数
         return $this->belongsTo(User_task::class);  
-    }
+    }*/
 }

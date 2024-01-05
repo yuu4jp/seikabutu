@@ -23,11 +23,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Task::class);  
     }
     
-    public function trainings()
-    {
-        return $this->hasMany(Training::class);
-    }
-    
     protected $fillable = [
         'name',
         'email',
@@ -35,9 +30,9 @@ class User extends Authenticatable
         'sex',
         'age',
         'departure',
-        'employee_id',
         'master',
         'image',
+        'training',
     ];
 
     /**

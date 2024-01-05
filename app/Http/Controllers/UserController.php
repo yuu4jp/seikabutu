@@ -7,22 +7,29 @@ use App\Models\User;
 use App\Models\Task;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Requests\PostRequest;
 
 class UserController extends Controller
 {
+    use SoftDeletes;
+    
     public function master(User $user)
     {
         return view('users.master')->with(['users'=>$user->get()]);
     }
     
-    public function add() 
+    public function add(User $user) 
     {
-        return view('users.add');
+        return view('users.add')->with(['user'=>$user]);
     }
     
-    public function create(Request $request) 
+    public function create(PostRequest $request,User $user) 
     {
-        User::create([
+        $input = $request['user'];
+        $user->fill($input)->save();
+        
+        /*User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -31,28 +38,36 @@ class UserController extends Controller
             'departure' => $request->departure,
             'image'=> $request->image,
             'master'=>$request->master,
-        ]);
+            'training'=>$request->training,
+        ]);*/
         return redirect('/master');
-        
-    }
-    
+        //↑
+    }   //２つのやり方があるっぽい
+        //↓
     public function task_create(Request $request,Task $task)
     {
         $input = $request['task'];
-        $task->fill($input)->save();   //2つのやり方が
-        /*User::create([　　　　　　　 //あるっぽい
-            'task' => $request->name,
-            'comment' => $request->comment,
-            'pdf' => $request->pdf,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);*/
+        $input_id =Auth::id();
+        $task->fill($input)->save();  
+        //attachメソッドを使って中間テーブルにデータを保存
+        $task->users()->attach($input_id);
         return redirect('/staff');
     }
     
-    public function staff(User $user) 
+    public function task_store(Request $request,Task $task)
     {
-        return view('users.staff')->with(['user'=>Auth::user()]);
+        $input = $request['task'];
+        //for ($i=0;$i==100;$i++) {
+        $input_id = $request->users_array;
+       // };
+        $task->fill($input)->save();
+        $task->users()->attach($input_id);
+        return redirect('/management');
+    }
+    
+    public function staff(User $user,Task $task) 
+    {
+        return view('users.staff')->with(['user'=>Auth::user(),'tasks'=>$task->get()]);
     }
     
     public function management(User $user)
@@ -62,7 +77,7 @@ class UserController extends Controller
     
     public function customize(User $user,Task $task)
     {
-        return view('users.customize')->with(['user' => $user,'task'=>$task]);
+        return view('users.customize')->with(['user' => $user,'tasks'=>$task->get()]);
      //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
     }
     
@@ -71,7 +86,7 @@ class UserController extends Controller
         return view('users.edit')->with(['user'=>$user]);
     }
     
-    public function update(Request $request, User $user)
+    public function update(PostRequest $request, User $user)
     {
         $input_user = $request['user'];
         $user->fill($input_user)->save();
@@ -79,8 +94,25 @@ class UserController extends Controller
         return redirect('/users/' . $user->id);
     }
     
-    public function employee(User $user)
+    public function employee(User $user,Task $task)
     {
-        return view('users.employee')->with(['user'=>$user]);
+        return view('users.employee')->with(['user'=>$user,'tasks'=>$task->get()]);
+    }
+    
+    public function task_delete(Task $task,User $user)
+    {
+        $task->delete();
+        return redirect('/staff')->with(['user'=>Auth::user()]);
+    }
+    
+    public function user_delete(User $user)
+    {
+        $user->delete();
+        return redirect('/master')->with(['users'=>$user->get()]);
+    }
+    
+    public function back(User $user)
+    {
+        return view('users.master')->with(['users'=>$user->get()]);
     }
 }

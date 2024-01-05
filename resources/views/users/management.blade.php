@@ -9,6 +9,25 @@
             <a href="/users/{{$user->id}}/employee">詳細</a>
         </div>
         @endforeach
+        <div class="task_add">
+            <h3>タスクの追加</h3>
+            <button popovertarget='task_add' popovertargetaction='show'>追加する</button>
+            <div popover id='task_add'>
+                <form action='/users/task_store' method="POST">
+                    @csrf
+                    <input type='text' name='task[task]' placeholder='タスクの名前'/>
+                    <input type='date' name='task[start_date]'>
+                    <input type='date' name='task[end_date]'>
+                    <h3>タスクを行う人</h3>
+                    @foreach($users as $user)
+                    <label>
+                        <input type="checkbox" name='users_array[]'　value="{{$user->id}}" >{{$user->name}}</input>
+                    </label>
+                    @endforeach
+                    <input type="submit" value='保存'/>
+                </form>
+            </div>
+        </div>
         <div class="carendar">
             <a href="carendars/carendar">カレンダー</a>
         </div>
