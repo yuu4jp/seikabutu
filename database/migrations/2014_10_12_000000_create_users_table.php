@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Http\Requests\PostRequest;
 return new class extends Migration
 {
     /**
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('departure');
             $table->integer('master')->default(2);
             $table->string('image')->nullable();
+            $table->string('training')->nullable();
         });
     }
 

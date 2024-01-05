@@ -25,11 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/create',[UserController::class,'create'])->name('create');
     Route::get('/staff',[UserController::class, 'staff'])->name('staff.index');
     Route::get('/management',[UserController::class,'management'])->name('management.index');
+    Route::get('/users/master',[UserController::class,'back'])->name('back');
     Route::get('/users/{user}',[UserController::class,'customize'])->name('customize');
-    Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('edit');
     Route::put('/users/{user}',[UserController::class,'update'])->name('update');
-    Route::get('/users/{user}/employee',[UserController::class,'employee'])->name('employee');
     Route::post('/users/task_create',[UserController::class,'task_create'])->name('task_create');
+    Route::post('/users/task_store',[UserController::class,'task_store'])->name('task_store');
+    Route::delete('/users/show/{task}/delete',[UserController::class,'task_delete'])->name('task_delete');
+    Route::delete('/users/delete/{user}',[UserController::class,'user_delete'])->name('user_delete');
+    Route::get('/users/{user}/employee',[UserController::class,'employee'])->name('employee');
+    Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('edit');
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

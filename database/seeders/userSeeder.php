@@ -23,6 +23,7 @@ class userSeeder extends Seeder
                 'departure'=>'部署',
                 'master'=>'アカウントの種類',
                 'image'=>'画像データ',
+                'training'=>'資格等',
         ]);
     }
 }

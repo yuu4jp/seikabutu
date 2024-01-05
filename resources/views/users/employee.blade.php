@@ -14,13 +14,11 @@
             <div class='departure'>
                 <h3>{{$user->departure}}</h3>
             </div>
-        </div>
-        {{--@foreach ($trainings as $training)
             <div class='training'>
-                <h3>{{$training->training}}</h3>
+                <h3>{{$user->training}}</h3>
             </div>
-        @endforeach--}}
-        {{--@foreach ($tasks as $task)
+        </div>
+        @foreach ($tasks as $task)
             <div class="task">
                 <button popovertarget='task' popovertargetaction='show'>{{$task->task}}</button>
                 <div popover id='task'>
@@ -32,6 +30,6 @@
             <div class="stastus">
                 <h3></h3>
             </div>
-        @endforeach--}}
+        @endforeach
         <div class="back"><a href="/management">back</a></div>
 </x-app-layout>

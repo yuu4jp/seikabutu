@@ -14,12 +14,10 @@
             <div class='departure'>
                 <h3>{{$user->departure}}</h3>
             </div>
-        </div>
-        {{--@foreach ($trainings as $training)
-            <div class='training'>
-                <h3>{{$training->training}}</h3>
+            <div class="training">
+                <h3>{{$user->training}}</h3>
             </div>
-        @endforeach--}}
+        </div>
         @foreach ($tasks as $task)
             <div class="task">
                 <h3>{{$task->task}}</h3>
