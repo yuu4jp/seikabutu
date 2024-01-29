@@ -17,10 +17,11 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->text('comment')->nullable();
-            $table->string('task');
+            $table->string('task')->nullable();
             $table->string('pdf')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('status')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
 
         });

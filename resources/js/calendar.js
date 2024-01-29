@@ -1,4 +1,4 @@
-import '@fullcalendar/core/vdom'; // （for Vite）ver6には不要なので、エラーが出たらここを消す。
+ // （for Vite）ver6には不要なので、エラーが出たらここを消す。
 import axios from "axios";
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -28,7 +28,7 @@ if (calendarEl !== null) {
                     document.getElementById("new-start_date").value = "";
                     document.getElementById("new-end_date").value = "";
                     document.getElementById("new-event_body").value = "";
-                    document.getElementById("new-event_color").value = "blue";
+                    //document.getElementById("new-event_color").value = "blue";
     
                     // 新規予定追加モーダルを開く
                     document.getElementById('modal-add').style.display = 'flex';

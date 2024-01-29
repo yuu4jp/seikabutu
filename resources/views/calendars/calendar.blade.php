@@ -1,40 +1,25 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>FullCalendar</title>
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        @vite(['resources/css/app.css', 'resources/js/app.js']) <!-- vite用の記述忘れずに -->
-    </head>
-    <body>
-        <!-- 以下のdivタグ内にカレンダーを表示 -->
-        <div id='calendar'></div>
-        
-                <!-- カレンダー新規追加モーダル -->
-        <div id="modal-add" class="modal">
-            <div class="modal-contents">
-                <form method="POST" action="{{ route('create') }}">
-                    @csrf
-                    <input id="new-id" type="hidden" name="id" value="" />
-                    <label for="event_title">タイトル</label>
-                    <input id="new-event_title" class="input-title" type="text" name="event_title" value="" />
-                    <label for="start_date">開始日時</label>
-                    <input id="new-start_date" class="input-date" type="date" name="start_date" value="" />
-                    <label for="end_date">終了日時</label>
-                    <input id="new-end_date" class="input-date" type="date" name="end_date" value="" />
-                    <label for="event_body" style="display: block">内容</label>
-                    <textarea id="new-event_body" name="event_body" rows="3" value=""></textarea>
-                    <label for="event_color">背景色</label>
-                    <select id="new-event_color" name="event_color">
-                        <option value="blue" selected>青</option>
-                        <option value="green">緑</option>
-                    </select>
-                    <button type="button" onclick="closeAddModal()">キャンセル</button>
-                    <button type="submit">決定</button>
-                </form>
-            </div>
+<x-app-layout>
+    <!-- 以下のdivタグ内にカレンダーを表示 -->
+    <div id='calendar'></div>
+    
+            <!-- カレンダー新規追加モーダル -->
+    <div id="modal-add" class="modal">
+        <div class="modal-contents">
+            <form method="POST" action="{{ route('calendar.create') }}">
+                @csrf
+                <input id="new-id" type="hidden" name="id" value="" />
+                <label for="event_title">タイトル</label>
+                <input id="new-event_title" class="input-title" type="text" name="event_title" value="" />
+                <label for="start_date">開始日時</label>
+                <input id="new-start_date" class="input-date" type="date" name="start_date" value="" />
+                <label for="end_date">終了日時</label>
+                <input id="new-end_date" class="input-date" type="date" name="end_date" value="" />
+                <label for="event_body" style="display: block">内容</label>
+                <textarea id="new-event_body" name="event_body" rows="3" value=""></textarea>
+                <button type="button" onclick="closeAddModal()">キャンセル</button>
+                <button type="submit">決定</button>
+            </form>
+        </div>
         </div>
 <!-- （ここまで） -->
     </body>
@@ -96,4 +81,4 @@
     }
     </style>
     <!--（ここまで） -->
-</html>
+</x-app-layout>

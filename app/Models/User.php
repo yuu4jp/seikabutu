@@ -31,7 +31,7 @@ class User extends Authenticatable
         'age',
         'departure',
         'master',
-        'image',
+        'image_url',
         'training',
     ];
 
