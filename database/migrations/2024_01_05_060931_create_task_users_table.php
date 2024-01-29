@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_task', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users');   //参照先のテーブル名を
-            $table->foreignId('task_id')->constrained('tasks');    //constrainedに記載
+        Schema::create('task_user', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();   //参照先のテーブル名を
+            $table->foreignId('task_id')->constrained('tasks')->cascadeOnUpdate()->cascadeOnDelete();    //constrainedに記載
             $table->primary(['task_id', 'user_id']);
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tasks');
+        Schema::dropIfExists('task_users');
     }
 };

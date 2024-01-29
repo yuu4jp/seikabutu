@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('age');
             $table->string('departure');
             $table->integer('master')->default(2);
-            $table->string('image')->nullable();
+            $table->string('image_url')->nullable();
             $table->string('training')->nullable();
         });
     }

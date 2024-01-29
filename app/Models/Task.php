@@ -17,6 +17,7 @@ class Task extends Model
         'task',
         'comment',
         'pdf',
+        'status',
         'start_date',
         'end_date',
     ];

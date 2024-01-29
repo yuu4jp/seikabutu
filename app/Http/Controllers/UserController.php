@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Requests\PostRequest;
+use Cloudinary;
 
 class UserController extends Controller
 {
@@ -24,22 +25,34 @@ class UserController extends Controller
         return view('users.add')->with(['user'=>$user]);
     }
     
-    public function create(PostRequest $request,User $user) 
+    public function create(Request $request,User $user) 
     {
-        $input = $request['user'];
-        $user->fill($input)->save();
         
-        /*User::create([
+        /*$input = $request['user'];
+        $user->fill($input)->save();*/
+        $validated = $request->validate([
+            'name'=>'required|string',
+            'email'=>'required',
+            'password'=>'required',
+            'sex'=>'required|string',
+            'age'=>'required|integer',
+            'departure'=>'required',
+            'master'=>'required',
+        ]);
+        
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        //$input += ['image_url' => $image_url];
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'sex' => $request->sex,
             'age' => $request ->age,
             'departure' => $request->departure,
-            'image'=> $request->image,
+            'image_url'=> $image_url,
             'master'=>$request->master,
             'training'=>$request->training,
-        ]);*/
+        ]);
         return redirect('/master');
         //↑
     }   //２つのやり方があるっぽい
@@ -47,7 +60,7 @@ class UserController extends Controller
     public function task_create(Request $request,Task $task)
     {
         $input = $request['task'];
-        $input_id =Auth::id();
+        $input_id = Auth::id();
         $task->fill($input)->save();  
         //attachメソッドを使って中間テーブルにデータを保存
         $task->users()->attach($input_id);
@@ -57,9 +70,7 @@ class UserController extends Controller
     public function task_store(Request $request,Task $task)
     {
         $input = $request['task'];
-        //for ($i=0;$i==100;$i++) {
-        $input_id = $request->users_array;
-       // };
+        $input_id = $request['user_id'];
         $task->fill($input)->save();
         $task->users()->attach($input_id);
         return redirect('/management');
@@ -86,9 +97,18 @@ class UserController extends Controller
         return view('users.edit')->with(['user'=>$user]);
     }
     
-    public function update(PostRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
+        $validated = $request->validate([
+            'user.name'=>'required|string',
+            'user.sex'=>'required|string',
+            'user.age'=>'required|integer',
+            'user.departure'=>'required',
+        ]);
         $input_user = $request['user'];
+        //dd($request->file('image'));
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input_user += ['image_url' => $image_url];
         $user->fill($input_user)->save();
     
         return redirect('/users/' . $user->id);
@@ -115,4 +135,25 @@ class UserController extends Controller
     {
         return view('users.master')->with(['users'=>$user->get()]);
     }
+    
+    public function task_add(Request $request,Task $task)
+    {
+        $input_task=$request['task'];
+        if($request->file('pdf')==null) {
+            $task->fill($input_task)->save();
+        }
+        else {
+            //dd($request->file('pdf'));
+            //dd($request->file('pdf')->getRealPath());
+            $target=$request->file('pdf')->getClientOriginalName();
+            $request->file('pdf')->storeAs('public',$target);
+            $input_task += ['pdf' => $target];
+            $task->fill($input_task)->save();
+        }
+        return redirect('/staff')->with(['user'=>Auth::user()]);
+    }
+        /*$pdf = Cloudinary::upload($request->file('pdf')->getRealPath())->getSecurePath();
+        $input_task=$request['task'];
+        $input_task += ['pdf' => $pdf];
+        $task->fill($input_task)->save();*/
 }
