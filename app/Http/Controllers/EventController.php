@@ -11,6 +11,7 @@ class EventController extends Controller
     public function show(){
         return view("calendars.calendar");
     }
+    
     public function create(Request $request, Task $task){
         // バリデーション（eventsテーブルの中でNULLを許容していないものをrequired）
         $request->validate([

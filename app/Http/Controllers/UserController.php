@@ -39,20 +39,33 @@ class UserController extends Controller
             'departure'=>'required',
             'master'=>'required',
         ]);
-        
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        if($request->file('image')==null){
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'sex' => $request->sex,
+                'age' => $request ->age,
+                'departure' => $request->departure,
+                //'image_url'=> $image_url,
+                'master'=>$request->master,
+                'training'=>$request->training,
+            ]);
+        }else{
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         //$input += ['image_url' => $image_url];
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'sex' => $request->sex,
-            'age' => $request ->age,
-            'departure' => $request->departure,
-            'image_url'=> $image_url,
-            'master'=>$request->master,
-            'training'=>$request->training,
-        ]);
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'sex' => $request->sex,
+                'age' => $request ->age,
+                'departure' => $request->departure,
+                'image_url'=> $image_url,
+                'master'=>$request->master,
+                'training'=>$request->training,
+            ]);
+        }
         return redirect('/master');
         //↑
     }   //２つのやり方があるっぽい
@@ -107,10 +120,14 @@ class UserController extends Controller
         ]);
         $input_user = $request['user'];
         //dd($request->file('image'));
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        $input_user += ['image_url' => $image_url];
-        $user->fill($input_user)->save();
-    
+        if($request->file('image')==null){
+            $user->fill($input_user)->save();
+        }else{
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $input_user += ['image_url' => $image_url];
+            $user->fill($input_user)->save();
+        }
+        
         return redirect('/users/' . $user->id);
     }
     
