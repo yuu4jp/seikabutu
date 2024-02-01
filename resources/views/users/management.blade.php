@@ -27,7 +27,7 @@
                     <h3>タスクを行う人</h3>
                     @foreach($users as $user)
                     <label>
-                        <input type="checkbox" name='user_id[]' value="{{$user->id}}" >{{$user->name}}</input>
+                        <input type="checkbox" name='user_id[]' value="{{$user->id}}">{{$user->name}}</input>
                     </label>
                     @endforeach
                     <input type="submit" value='保存'/>
