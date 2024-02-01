@@ -28,9 +28,8 @@
             <button popovertarget='{{$task->id}}' popovertargetaction='show'><br><h1>　{{$task->task}}　<span class='border-4 rounded border-black p-1'>{{$task->status}}</span></h1></button>
             <div popover id='{{$task->id}}' class='task_modal'>
                 <h3>{{$task->comment}}</h3>
+                @if($task->pdf)
                 <a target='_blank' href='/storage/{{$task->pdf}}'>アップロードファイルの確認</a>
-                @if($task->pdf==null)
-                <h1>なし</h1>
                 @endif
                 <button popovertarget='{{$task->id}}' popovertargetaction='hidden'>閉じる</button>
             </div>
