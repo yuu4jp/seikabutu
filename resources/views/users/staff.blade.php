@@ -63,7 +63,8 @@
             </div>
         @endforeach
         </div>
-        <a class='carendar' href="/calendar"><img class='fixed bottom-[20px] right-[60px]' width="100px" height="100px" src="https://ppdtp.com/wp-content/uploads/2019/06/beautiful-half-circle-3-500x500.png">カレンダー</a>
+        <a class='carendar' href="/calendar">カレンダー</a>
+        <img class='fixed bottom-[20px] right-[60px]' width="100px" height="100px" src="https://ppdtp.com/wp-content/uploads/2019/06/beautiful-half-circle-3-500x500.png">
     </div>
     <script>
     function deleteTask(id) {

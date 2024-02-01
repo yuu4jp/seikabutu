@@ -25,7 +25,7 @@
         </div>
         <div class="bg-slate-400 absolute top-[500px] left-[300px] w-40 md:w-1/3 xl:w-1/2 px-5 py-7 rounded-lg flex flex-wrap">
             @foreach ($user->tasks as $task)
-            <button popovertarget='{{$task->id}}' popovertargetaction='show'><br><h1>　{{$task->task}}　<span class='order-4 rounded border-black p-1'>{{$task->status}}</span></h1></button>
+            <button popovertarget='{{$task->id}}' popovertargetaction='show'><br><h1>　{{$task->task}}　<span class='border-4 rounded border-black p-1'>{{$task->status}}</span></h1></button>
             <div popover id='{{$task->id}}' class='task_modal'>
                 <h3>{{$task->comment}}</h3>
                 <a target='_blank' href='/storage/{{$task->pdf}}'>アップロードファイルの確認</a>

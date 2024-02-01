@@ -163,7 +163,6 @@ class UserController extends Controller
             //dd($request->file('pdf'));
             //dd($request->file('pdf')->getRealPath());
             $target=$request->file('pdf')->getClientOriginalName();
-            dd($target);
             $request->file('pdf')->storeAs('public',$target);
             $input_task += ['pdf' => $target];
             $task->fill($input_task)->save();
