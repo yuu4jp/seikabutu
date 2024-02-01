@@ -160,8 +160,6 @@ class UserController extends Controller
             $task->fill($input_task)->save();
         }
         else {
-            //dd($request->file('pdf'));
-            //dd($request->file('pdf')->getRealPath());
             $target=$request->file('pdf')->getClientOriginalName();
             $request->file('pdf')->storeAs('public',$target);
             $input_task += ['pdf' => $target];
@@ -169,8 +167,4 @@ class UserController extends Controller
         }
         return redirect('/staff')->with(['user'=>Auth::user()]);
     }
-        /*$pdf = Cloudinary::upload($request->file('pdf')->getRealPath())->getSecurePath();
-        $input_task=$request['task'];
-        $input_task += ['pdf' => $pdf];
-        $task->fill($input_task)->save();*/
 }

@@ -44,22 +44,23 @@
                     @csrf
                     @method('PUT')
                     <h3>{{$task->task}}</h3>
-                    <textarea name='task[comment]' >{{$task->comment}}</textarea>
-                    <input type="file" name='pdf' value={{$user->pdf}}>
+                    <textarea name='task[comment]' >{{$task->comment}}</textarea><br>
+                    <input type="file" name='pdf'><br>
+                    <h4>既存ファイル→{{$task->pdf}}</h4>
                     <select class='select' name='task[status]'>
                         <option value="開始前">開始前</option>
                         <option value="作業中">作業中</option>
                         <option value="終了">終了</option>
-                    </select>
-                    <input type='submit' value='保存'/>
+                    </select><br>
+                    <input type='submit' value='保存' class="border-2 rounded border-black mt-2">
                 </form>
                 
                 <form action="/users/show/{{$task->id}}/delete" id="form_{{$task->id}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type='button' onclick="deleteTask({{$task->id}})">削除</button>
+                    <button type='button' onclick="deleteTask({{$task->id}})" class="border-2 rounded border-black">削除</button>
                 </form>
-                <button popovertarget='{{$task->id}}' popovertargetaction='hidden'>閉じる</button>
+                <button popovertarget='{{$task->id}}' popovertargetaction='hidden' class="border-2 rounded border-black">閉じる</button>
             </div>
         @endforeach
         </div>
