@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/calendar/create',[EventController::class,'create'])->name('calendar.create');
     Route::post('/calendar/get',[EventController::class,'get']);
     Route::get('/carendars/carendar',[EventController::class,'show'])->name('show');
+    Route::get('public/{task}',[UserControler::class,'uplode'])->name('uplode');
     
 });
 Route::get('/dashboard', function () {

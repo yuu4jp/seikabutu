@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Requests\PostRequest;
 use Cloudinary;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -161,10 +162,13 @@ class UserController extends Controller
         }
         else {
             $target=$request->file('pdf')->getClientOriginalName();
-            $request->file('pdf')->storeAs('public',$target);
-            $input_task += ['pdf' => $target];
+            //$path=Storage::disk('s3')->put('/',$target,'public');
+            $request->file('pdf')->storeAs('public',$target,'s3');
+            $path=Storage::disk('s3')->get_public_url(bucket, target_object_path);
+            $input_task += ['pdf' => $path];
             $task->fill($input_task)->save();
         }
         return redirect('/staff')->with(['user'=>Auth::user()]);
     }
+    
 }
